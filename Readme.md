@@ -69,7 +69,7 @@ This prototype utilizes Firebase services. For local development, using the **Fi
 1.  **Clone the Repository:**
     
 bash
-    git clone https://github.com/aravindinduri/aeye.git
+    git clone https://github.com/Radhika-borigam/aeye.git
 
 
 2.  **Configure Firebase:**
