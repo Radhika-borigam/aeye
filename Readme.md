@@ -50,10 +50,6 @@ AEYE leverages a modern, serverless-friendly technology stack:
         *   **Firestore / Realtime Database:** For storing incident metadata and enabling real-time UI updates.
 *   **AI Engine:**
     *   ![Google Cloud](https://img.shields.io/badge/Google_Gemini_Pro_Vision-API-4285F4?logo=googlecloud&logoColor=white)
-*   **Video Processing (within Firebase Functions or called service):**
-    *   **[Specify how frames are extracted, e.g., "Google Cloud Transcoder API," "FFmpeg via custom Function layer," or "Third-party video API"]**
-    *   *(If using FFmpeg in Functions, mention potential complexities or if a pre-built layer is used).*
-
 ---
 
 ## ⚙️ Getting Started (Prototype - Local Setup with Firebase Emulators)
@@ -63,7 +59,7 @@ This prototype utilizes Firebase services. For local development, using the **Fi
 **Prerequisites:**
 
 *   Node.js (LTS version recommended, includes npm/yarn)
-*   Firebase CLI installed and configured: `npm install -g firebase-tools`
+*   Firebase CLI installed and configured: npm install -g firebase-tools
 *   A Google Cloud Project with the Gemini API enabled and an **API Key**.
 *   A Firebase Project created and configured for this application (Storage, Functions, Firestore/Realtime DB).
 *   **[If your video processing in Firebase Functions relies on external tools like FFmpeg not bundled by default, specify any local setup needed for emulation, e.g., local FFmpeg installation.]**
@@ -71,69 +67,76 @@ This prototype utilizes Firebase services. For local development, using the **Fi
 **Setup & Run Instructions:**
 
 1.  **Clone the Repository:**
-    ```bash
+    
+bash
     git clone https://github.com/aravindinduri/aeye.git
-    ```
+
 
 2.  **Configure Firebase:**
-    *   Link your local project to your Firebase project: `firebase use YOUR_PROJECT_ID`
-    *   Ensure your `firebase.json` is configured for Functions, Storage, and Firestore/Realtime DB.
+    *   Link your local project to your Firebase project: firebase use YOUR_PROJECT_ID
+    *   Ensure your firebase.json is configured for Functions, Storage, and Firestore/Realtime DB.
 
 3.  **Environment Variables (Frontend - Next.js):**
-    *   Create a `.env.local` file in your Next.js project root (usually the main project root or a `frontend/` subfolder).
+    *   Create a .env.local file in your Next.js project root (usually the main project root or a frontend/ subfolder).
     *   Add your Firebase client-side configuration variables:
-        ```env
+        
+env
         NEXT_PUBLIC_FIREBASE_API_KEY=YOUR_FIREBASE_WEB_API_KEY
         NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=YOUR_PROJECT_ID.firebaseapp.com
         NEXT_PUBLIC_FIREBASE_PROJECT_ID=YOUR_PROJECT_ID
         NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=YOUR_PROJECT_ID.appspot.com
         NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=YOUR_SENDER_ID
         NEXT_PUBLIC_FIREBASE_APP_ID=YOUR_APP_ID
-        ```
+
 
 4.  **Environment Variables (Backend - Firebase Functions):**
-    *   Set your `GOOGLE_API_KEY` for Gemini securely for your Firebase Functions. This is typically done via:
-        ```bash
+    *   Set your GOOGLE_API_KEY for Gemini securely for your Firebase Functions. This is typically done via:
+        
+bash
         firebase functions:config:set gemini.key="YOUR_GEMINI_API_KEY_HERE"
         # You might have other config for service accounts if calling other Google Cloud services
-        ```
-    *   In your Function code, you'll access this via `functions.config().gemini.key`.
+
+    *   In your Function code, you'll access this via functions.config().gemini.key.
 
 5.  **Install Dependencies:**
-    *   For the Next.js app (if it's the root or in a `frontend/` folder):
-        ```bash
+    *   For the Next.Alt texjs app (if it's the root or in a frontend/ folder):
+        
+bash
         npm install
         # or
         # yarn install
-        ```
-    *   For Firebase Functions (usually in a `functions/` folder):
-        ```bash
+
+    *   For Firebase Functions (usually in a functions/ folder):
+        
+bash
         cd functions
         npm install
         # or
         # yarn install
         cd ..
-        ```
+
 
 6.  **Run with Firebase Emulators (Recommended):**
     *   Start the Firebase emulators:
-        ```bash
+        
+bash
         firebase emulators:start
-        ```
+
     *   This will typically start emulators for Auth, Functions, Firestore, Storage, etc. Note the ports they are running on.
     *   Your Next.js app will connect to these emulated services.
 
 7.  **Run the Next.js Development Server:**
     *   In a new terminal, start the Next.js app:
-        ```bash
+        
+bash
         npm run dev
         # or
         # yarn dev
-        ```
-    *   The frontend app will typically run on `http://localhost:3000`.
+
+    *   The frontend app will typically run on http://localhost:3000.
 
 8.  **Access the Application:**
-    *   Open `http://localhost:3000` in your browser.
+    *   Open http://localhost:3000 in your browser.
 
 9.  **Using AEYE:**
     *   Upload a video file (it will go to the emulated Firebase Storage).
@@ -153,10 +156,9 @@ This prototype utilizes Firebase services. For local development, using the **Fi
 *   **Phase 3 (Future Scope):**
     *   Investigate cost-effective strategies for video processing at scale.
     *   User authentication via Firebase Auth.
-    *   Explore potential for near real-time analysis of streams if feasible with the architecture.
 
 ---
-
+### Demo 
+[Project Demo](https://drive.google.com/file/d/1ZZXs7rJ8kM3KWij-fRgev1A_ELZFkKPG/view)
 #### Screenshots
-![https://i.ibb.co/cjnM4fJ/Screenshot-from-2025-05-31-07-53-23.png]
----
+![AEYE Incident Detection UI](https://i.ibb.co/cjnM4fJ/Screenshot-from-2025-05-31-07-53-23.png)
